@@ -30,6 +30,9 @@ const initializeServerAndDatabase = async () => {
 initializeServerAndDatabase();
 
 // register user api
+app.get("/" , (req,res)=> {
+res.send("Hello world!")
+})
 app.post("/register/", async (request, response) => {
   const { username, password, name, gender } = request.body;
   const hashedPasswd = await bcrypt.hash(password, 10);
