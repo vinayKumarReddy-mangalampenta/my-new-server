@@ -4,10 +4,11 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-    "start": "node app.js",
-    "test": "echo /"
+        "test": "echo \"Error: no test specified\" && exit 1 ",
+    "start": "node app.js"
+    
   },
-    "author": "",
+    "author": "me",
     "license": "ISC",
     "dependencies": {
       "jsonwebtoken": "8.5.1",
