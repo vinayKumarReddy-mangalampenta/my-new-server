@@ -10,9 +10,7 @@ const dbPath = path.join(__dirname, "twitterClone.db");
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
-    origin: "*",
-  })
+  cors()
 );
 let db = null;
 
