@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 app.post("/register/", async (request, response) => {
-  const { username, password, name, gender } = request.body;
+  const { username, password, name } = request.body;
   const hashedPasswd = await bcrypt.hash(password, 10);
 
   const isUsernameRegisteredQuery = `
@@ -47,23 +47,33 @@ app.post("/register/", async (request, response) => {
   const isUsernameRegistered = await db.get(isUsernameRegisteredQuery);
 
   if (isUsernameRegistered === undefined) {
-    if (password.length < 6) {
+    if (username === "") {
       response.statusCode = 400;
-      response.send("Password is too short");
+      response.send({ error_msg: "UserName Can't be empty" });
     } else {
-      const registerUserQuery = `
-  insert into user(name,username,password,gender) 
+      if (name === "") {
+        response.statusCode = 400;
+        response.send({ error_msg: "Name Can't be empty" });
+      } else {
+        if (password.length < 6) {
+          response.statusCode = 400;
+          response.send({ error_msg: "Password is too short" });
+        } else {
+          const registerUserQuery = `
+  insert into user(name,username,password) 
   values 
-  ('${name}','${username}','${hashedPasswd}','${gender}');`;
+  ('${name}','${username}','${hashedPasswd}');`;
 
-      const registerUser = await db.run(registerUserQuery);
-      console.log(registerUser.lastID);
-      response.statusCode = 200;
-      response.send("User created successfully");
+          const registerUser = await db.run(registerUserQuery);
+          console.log(registerUser.lastID);
+          response.statusCode = 200;
+          response.send({ token: "User created successfully" });
+        }
+      }
     }
   } else {
     response.statusCode = 400;
-    response.send("User already exists");
+    response.send({ error_msg: "User already exists" });
   }
 });
 
@@ -134,7 +144,7 @@ const authenticateToken = async (request, response, next) => {
   }
 };
 
-app.get("/userdetails/", async (request, response) => {
+app.post("/userdetails/", async (request, response) => {
   const { jwtToken } = request.body;
   //  const jwtToken = authHeaders.split(" ")[1];
 
@@ -156,4 +166,21 @@ app.get("/userdetails/", async (request, response) => {
     }
   });
 });
+
+app.get("/idp-tracks/", async (request, response) => {
+  const getIdpTracksQuery = `select * from tracks ;`;
+
+  const idpTracks = await db.all(getIdpTracksQuery);
+
+  response.send(
+    idpTracks.map((each) => ({
+      trackName: each.track_name,
+      trackId: each.track_id,
+      description: each.description,
+      trackImage: each.track_image,
+      idpTrack: each.idp_track,
+    }))
+  );
+});
+
 module.exports = app;
