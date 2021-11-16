@@ -1,21 +1,21 @@
 ###
-POST http://localhost:3000/register
+POST http://localhost:3001/register
 Content-Type: application/json 
 
 {
-  "username": "adam_richard",
-  "password": "richard_567",
-  "name": "Adam Richard",
+  "username": "vinay",
+  "password": "vinay3012",
+  "name": "vinay kumar reddy mangalampenta",
   "gender": "male"
 }
 
 ###
-POST http://localhost:3000/login
+POST http://localhost:3001/login
 Content-Type: application/json 
 
 {
-  "username":"JoeBiden",
-  "password":"biden@123"
+  "username":"vinay",
+  "password":"vinay3012"
 }
 
 ###
