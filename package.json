@@ -1,22 +1,21 @@
 {
-    "name": "twitter",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1 ",
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1 ",
     "start": "node app.js"
-    
   },
-    "author": "me",
-    "license": "ISC",
-    "dependencies": {
-      "jsonwebtoken": "8.5.1",
-      "bcrypt": "5.0.1",
-         "cors": "^2.8.5",
-      "express": "4.17.1",
-      "nodemon": "2.0.7",
-      "sqlite": "4.0.19",
-      "sqlite3": "5.0.2"
-    }
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "8.5.1",
+    "bcrypt": "5.0.1",
+    "cors": "^2.8.5",
+    "express": "4.17.1",
+    "nodemon": "2.0.7",
+    "sqlite": "4.0.19",
+    "sqlite3": "5.0.2"
+  }
 }
