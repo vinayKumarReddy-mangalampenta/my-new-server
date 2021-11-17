@@ -3,10 +3,10 @@ POST http://localhost:3001/register
 Content-Type: application/json 
 
 {
-  "username": "vinay",
-  "password": "vinay3012",
-  "name": "vinay kumar reddy mangalampenta",
-  "gender": "male"
+  "username": "madhavi",
+  "password": "madhavi",
+  "name": "madhavi",
+  "gender": "female"
 }
 
 ###
@@ -14,8 +14,8 @@ POST http://localhost:3001/login
 Content-Type: application/json 
 
 {
-  "username":"vinay",
-  "password":"vinay3012"
+  "username": "madhavi",
+  "password": "madhavi",
 }
 
 ###

@@ -80,6 +80,7 @@ app.post("/register/", async (request, response) => {
 //login api
 app.post("/login", async (request, response) => {
   const { username, password } = request.body;
+  console.log(request.body);
   const isUserRegisteredQuery = `
     select 
     * 
