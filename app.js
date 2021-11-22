@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const cors = require("cors");
 const dbPath = path.join(__dirname, "learningPortal.db");
+const { v4 } = require("uuid");
 
 const app = express();
 app.use(express.json());
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 });
 app.post("/register/", async (request, response) => {
   const { username, password, name } = request.body;
+
   const hashedPasswd = await bcrypt.hash(password, 10);
 
   const isUsernameRegisteredQuery = `
@@ -162,7 +164,13 @@ app.post("/userdetails/", async (request, response) => {
   `;
 
       const userDetails = await db.get(getUserIdQuery);
-      response.send(userDetails);
+      response.send({
+          userId:userDetails.user_id,
+          username:userDetails.username,
+          userDetails.name,
+          userDetails.gender,
+          userImg : userDetails.user_img
+      });
     }
   });
 });
@@ -184,4 +192,12 @@ app.get("/tracks/", async (request, response) => {
   );
 });
 
+app.post('/upload',authenticateToken,async (request,this.response) => {
+    const{userImg,username} = request.body 
+    const uploadImageQuery = `
+    update user set user_img = '${userImg}' where username = '${username}'`
+    const res = await db.run(uploadImageQuery)
+    console.log(res)
+    response.send("updated")
+})
 module.exports = app;
