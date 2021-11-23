@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(cors());
 let db = null;
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("new-portal/build"));
+}
+
 const initializeServerAndDatabase = async () => {
   try {
     db = await open({
