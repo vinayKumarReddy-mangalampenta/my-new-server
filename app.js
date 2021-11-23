@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const cors = require("cors");
 const dbPath = path.join(__dirname, "learningPortal.db");
-const { v4 } = require("uuid");
 
 const app = express();
 app.use(express.json());
