@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1 ",
-    "start": "concurrently \"npm run server\" \"cd new-portal && npm start\"",
-    "server": "node app.js",
-    "new-portal": "npm start"
+    "start": "nodemon app.js"
   },
   "author": "me",
   "license": "ISC",
