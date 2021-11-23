@@ -1,14 +1,13 @@
 {
-  "name": "twitter",
+  "name": "ccbp",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1 ",
-    "start": "concurrently \"npm run server\" \"cd new-portal && npm start\"",
-    "server": "nodemon server.js",
-    "client": "npm start"
-  },
+    "start": "node app.js",
+    "heroku-postbuild": "cd new-portal && npm install  && npm run build"
+    },
   "author": "me",
   "license": "ISC",
   "dependencies": {
