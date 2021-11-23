@@ -13,10 +13,6 @@ app.use(express.json());
 app.use(cors());
 let db = null;
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("new-portal/build"));
-}
-
 const initializeServerAndDatabase = async () => {
   try {
     db = await open({
@@ -204,5 +200,9 @@ app.post("/upload", authenticateToken, async (request, response) => {
   const res = await db.run(uploadImageQuery);
 
   response.send({ msg: "updated" });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/new-portal/build/index.html'));
 });
 module.exports = app;
