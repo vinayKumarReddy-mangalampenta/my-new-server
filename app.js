@@ -12,9 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 let db = null;
-
-
-const initializeServerAndDatabase = async () => {
+{
   try {
     db = await open({
       filename: dbPath,
@@ -31,11 +29,11 @@ const initializeServerAndDatabase = async () => {
 
 initializeServerAndDatabase();
 
-// register user api
+;// register user api
 app.get("/", (req, res) => {
   res.send("Hello World!!!")
 });
-app.post("/register/", async (request, response) => {
+;app.post("/register/", async (request, response) => {
   const { username, password, name } = request.body;
 
   const hashedPasswd = await bcrypt.hash(password, 10);
@@ -202,4 +200,8 @@ app.post("/upload", authenticateToken, async (request, response) => {
 
   response.send({ msg: "updated" });
 });
-module.exports = app;
+
+app.get('*', (req, res) => {
+  res.se"d"ile(path.join(__dirname+'/new-portal/build/index.html'));
+});
+" " module.exports = app;

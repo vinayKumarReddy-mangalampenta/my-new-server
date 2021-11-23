@@ -1,15 +1,13 @@
 {
-  "name": "twitter",
+  "name": "ccbp",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1 ",
-    "start": "concurrently \"npm run server\" \"cd new-portal && npm start\"",
-    "server": "nodemon server.js",
-    "client": "npm start"
+    "start": "node app.js"
   },
-  "author": "me",
+  "author": "vinay kumar reddy",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "5.0.1",
