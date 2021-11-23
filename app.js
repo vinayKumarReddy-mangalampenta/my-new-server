@@ -13,9 +13,6 @@ app.use(express.json());
 app.use(cors());
 let db = null;
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("new-portal/build"));
-}
 
 const initializeServerAndDatabase = async () => {
   try {
@@ -23,7 +20,7 @@ const initializeServerAndDatabase = async () => {
       filename: dbPath,
       driver: sqlite3.Database,
     });
-    app.listen(process.env.PORT || 3001, () => {
+    app.listen(process.env.PORT || 3000, () => {
       console.log("Server running at http://localhost:3000/");
     });
   } catch (error) {
@@ -36,7 +33,7 @@ initializeServerAndDatabase();
 
 // register user api
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "new-portal/public/", "index.html"));
+  res.send("Hello World!!!")
 });
 app.post("/register/", async (request, response) => {
   const { username, password, name } = request.body;
