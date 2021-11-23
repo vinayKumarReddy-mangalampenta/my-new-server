@@ -32,7 +32,7 @@ initializeServerAndDatabase();
 
 // register user api
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, "new-portal/public/", "index.html"));
 });
 app.post("/register/", async (request, response) => {
   const { username, password, name } = request.body;
@@ -164,12 +164,13 @@ app.post("/userdetails/", async (request, response) => {
   `;
 
       const userDetails = await db.get(getUserIdQuery);
+
       response.send({
-          userId:userDetails.user_id,
-          username:userDetails.username,
-          userDetails.name,
-          userDetails.gender,
-          userImg : userDetails.user_img
+        userId: userDetails.user_id,
+        username: userDetails.username,
+        name: userDetails.name,
+        gender: userDetails.gender,
+        userImg: userDetails.user_image,
       });
     }
   });
@@ -192,12 +193,12 @@ app.get("/tracks/", async (request, response) => {
   );
 });
 
-app.post('/upload',authenticateToken,async (request,this.response) => {
-    const{userImg,username} = request.body 
-    const uploadImageQuery = `
-    update user set user_img = '${userImg}' where username = '${username}'`
-    const res = await db.run(uploadImageQuery)
-    console.log(res)
-    response.send("updated")
-})
+app.post("/upload", authenticateToken, async (request, response) => {
+  const { userImg, username } = request.body;
+  const uploadImageQuery = `
+    update user set user_image = '${userImg}' where username = '${username}'`;
+  const res = await db.run(uploadImageQuery);
+
+  response.send({ msg: "updated" });
+});
 module.exports = app;
