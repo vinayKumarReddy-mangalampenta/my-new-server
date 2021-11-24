@@ -201,4 +201,10 @@ app.post("/upload", authenticateToken, async (request, response) => {
   response.send({ msg: "updated" });
 });
 
+app.get("/all/users", async (request, response) => {
+  const getUsersListQuery = `select * from user;`;
+  const data = await db.all(getUsersListQuery);
+  response.send({ data });
+});
+
 module.exports = app;

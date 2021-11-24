@@ -27,4 +27,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/idp-tracks/
+GET http://localhost:3000/all/users
