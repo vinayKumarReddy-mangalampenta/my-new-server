@@ -10,12 +10,13 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/login
+get  http://localhost:8000/phenix/users/messages
 Content-Type: application/json 
 
 {
-  "username": "madhavi",
-  "password": "madhavi",
+  "user1": "2394d-b17e-48cc-8276-6c9b973a950e",
+  "user2": "6cc95-6414-43f2-bb9b-138e0ceaed61",
+  "messages_id":"hfoew-ih09329-84khfi2903o32-432wnfi8"
 }
 
 ###

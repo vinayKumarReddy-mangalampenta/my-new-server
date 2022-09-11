@@ -18,8 +18,8 @@ const initializeServerAndDatabase = async () => {
       filename: dbPath,
       driver: sqlite3.Database,
     });
-    app.listen(process.env.PORT || 3000, () => {
-      console.log("Server running at http://localhost:3000/");
+    app.listen(process.env.PORT || 8000, () => {
+      console.log("Server running at http://localhost:8000/");
     });
   } catch (error) {
     console.log(error);
@@ -35,9 +35,7 @@ app.get("/", (req, res) => {
 });
 app.post("/register/", async (request, response) => {
   const { username, password, name } = request.body;
-
   const hashedPasswd = await bcrypt.hash(password, 10);
-
   const isUsernameRegisteredQuery = `
   select 
   * 
@@ -204,6 +202,20 @@ app.post("/upload", authenticateToken, async (request, response) => {
 app.get("/all/users", async (request, response) => {
   const getUsersListQuery = `select * from user;`;
   const data = await db.all(getUsersListQuery);
+  response.send({ data });
+}); 
+
+app.get("/phenix/users/messages", async (request, response) => {
+  const { user1, user2 } = request.body
+  const getUsersListQuery = `select * from phenix_user_messages where user1_id in ("${user1}","${user2}") and user2_id in ("${user1}","${user2}");`;
+  const data = await db.get(getUsersListQuery);
+  response.send({ data });
+});
+
+app.post("/phenix/users/messages", async (request, response) => {
+  const { user1, user2,messages_id } = request.body
+  const getUsersListQuery = `insert into phenix_user_messages(user1_id,user2_id,messages_id) values("${user1}","${user2}","${messages_id}");`;
+  const data = await db.run(getUsersListQuery);
   response.send({ data });
 });
 
